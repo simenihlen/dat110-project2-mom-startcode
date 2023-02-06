@@ -9,7 +9,7 @@ public class PublishMsg extends Message {
 	// TODO:
 	// Implement object variables - a topic and a message is required
 
-	// Constructor, get/set-methods, and toString method
+	// Complete the constructor, get/set-methods, and toString method
 	// as described in the project text
 	
 	public String getMessage() {
