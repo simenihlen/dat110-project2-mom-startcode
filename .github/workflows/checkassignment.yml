@@ -19,5 +19,21 @@ jobs:
           cache: maven
       - name: Compile with Maven
         run: mvn --batch-mode --update-snapshots compile
+      - name: Test Storage
+        run: mvn --batch-mode --update-snapshots test -Dtest=TestStorage
       - name: Test with Maven
-        run: mvn --batch-mode --update-snapshots test
+        run: mvn --batch-mode --update-snapshots test -Dtest=Test1ConnectDisconnect
+      - name: Test with Maven
+        run: mvn --batch-mode --update-snapshots test -Dtest=Test2Reconnect
+      - name: Test with Maven
+        run: mvn --batch-mode --update-snapshots test -Dtest=Test3MultipleConnections
+      - name: Test with Maven
+        run: mvn --batch-mode --update-snapshots test -Dtest=Test4CreateDelete
+      - name: Test with Maven
+        run: mvn --batch-mode --update-snapshots test -Dtest=Test5Subscribe
+      - name: Test with Maven
+        run: mvn --batch-mode --update-snapshots test -Dtest=Test6Publish
+      - name: Test with Maven
+        run: mvn --batch-mode --update-snapshots test -Dtest=Test7MultiPublish
+      - name: Test IoT System
+        run: mvn --batch-mode --update-snapshots test -Dtest=TestIoTSystem
