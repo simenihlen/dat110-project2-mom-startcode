@@ -20,27 +20,27 @@ You are assumed to have solid understanding of the material in Chapter 4 (Commun
 
 The figure below gives an overview of the PB-MOM that is to be implemented:
 
-The client-side of the PB-MOM consists of *publishers and subscribers* that can create/delete topics, subscribe/unsubscribe to *topics*, and *publish* messages to topics. When a publisher publishes a message on a given topic, then all currently connected clients subscribing to the topic is to receive the message.
+- The client-side of the PB-MOM consists of *publishers and subscribers* that can create/delete topics, subscribe/unsubscribe to *topics*, and *publish* messages to topics. When a publisher publishes a message on a given topic, then all currently connected clients subscribing to the topic is to receive the message.
 
-The server-side is comprised of a *Broker* that manages the connected clients (publishers and subscribers), topics and subscriptions, and which acts as an intermediate responsible for publishing messages to the subscribers of a given topic.  
+- The server-side is comprised of a *Broker* that manages the connected clients (publishers and subscribers), topics and subscriptions, and which acts as an intermediate responsible for publishing messages to the subscribers of a given topic.  
 
 ![](assets/markdown-img-paste-20200218140925961.jpg)
 
 The project is comprised of the following main tasks:
 
-**Task A.** Implement classes for the messages to be used in the publish-subscribe protocol between clients and the broker (server).
+- **Task A.** Implement classes for the messages to be used in the publish-subscribe protocol between clients and the broker (server).
 
-**Task B.** Implement the *storage* of topics and subscriptions in the broker, and the *dispatcher* responsible for processing of publish-subscribe messages received from connected clients.
+- **Task B.** Implement the *storage* of topics and subscriptions in the broker, and the *dispatcher* responsible for processing of publish-subscribe messages received from connected clients.
 
-**Task C.** Application of the PB-MOM for implementing a small IoT system in which a sensor (client) publishes the current temperature on a temperature topic to which a display (client) is subscribing (see also lab-exercises from earlier weeks and project 1).
+- **Task C.** Application of the PB-MOM for implementing a small IoT system in which a sensor (client) publishes the current temperature on a temperature topic to which a display (client) is subscribing (see also lab-exercises from earlier weeks and project 1).
 
-**Task D.** Experiment with PB-MOM for implementing the ChApp (Chat Social Network Application) where users can send short messages to each other via topics similar to what is found in many social network applications.
+- **Task D.** Experiment with PB-MOM for implementing the ChApp (Chat Social Network Application) where users can send short messages to each other via topics similar to what is found in many social network applications.
 
-In addition, there are two optional - and more challenging task for those interested in taking the project a bit further.
+In addition, there are two optional - and more challenging task for those who interested in taking the project a bit further.
 
-**Task E.** Extend the broker such that if a subscribing client is currently disconnected and later reconnects, then the client will be provided with the messages that may have been published on the topic while the client was disconnected.
+- **Task E.** Extend the broker such that if a subscribing client is currently disconnected and later reconnects, then the client will be provided with the messages that may have been published on the topic while the client was disconnected.
 
-**Task F.** Extend the broker from being single-threaded to being multi-threaded having a dispatcher thread for handling each connected client.
+- **Task F.** Extend the broker from being single-threaded to being multi-threaded having a dispatcher thread for handling each connected client.
 
 **Task E is most likely easier than Task F**
 
@@ -52,25 +52,37 @@ One member of the group should start by entering the following repository on git
 
 https://github.com/selabhvl/dat110-project2-startcode.git
 
-and then do a *Fork* of the repository (see button in the upper right of the repository web page).
+https://github.com/lmkr/dat110-project2-mom-startcode
+
+and choose *Use this template* of the repository (see button in the upper right of the repository web page).
 
 This will create a "copy" of the start-code repository on the group members own github repository account.
 
-In order for the other group members to work together on the forked copy of the start-code, the other group members must be provided with access to read/write on the forked repository. See *Settings* and *Manage Access* for the repository.
+In order for the other group members to work together on the same copy of the start-code, the other group members must be provided with access to read/write on the repository. See *Settings* and *Manage Access* for the repository.
 
-All group members should clone the forked repository which can now be used as a repository for collaborating on the code.
+All group members can now clone the repository and collaborate on the code.
 
-#### Clone the testing repository
+The repository contains the start code organised into a [Maven](https://maven.apache.org/) project and can be imported into IDEs such as Eclipse and IntelliJ.
 
-In addition, each group member should clone (but not fork) the following project:
+- Importing into Eclipse: Use `File -> Import -> Maven -> Existing Maven Projects` to import the startcode project
+- Importing into IntelliJ: Use `File -> New -> Project From Existing Sources` to import the startcode project
 
-https://github.com/selabhvl/dat110-project2-testing
-
-which contains a number of unit tests that can be used for some basic testing of the implemented functionality. These tests are by no means complete, and when running the test you should also check in the Eclipse console that no exceptions are raised when running the tests.
+The `src/main` folder contains the source code while the `src/test` folder contains a number of unit tests that can be used for some basic testing of the implemented functionality. These tests are by no means complete, and when running the test you should also check in the Eclipse console that no exceptions are raised when running the tests.
 
 It should not be necessary to add additional classes in the start-code in order to complete the project. The unit-tests should not be modified as they will be used for evaluation of the submitted solution.
 
-**IMPORTANT NOTE:** When opening the projects in Eclipse, there will be some compile-errors. These will go away as you complete the implementation of the tasks below.
+The code and tests can be compiled and run from the IDE or using maven commands with targets such as:
+
+```
+%>mvn compile
+%>mvn test
+```
+
+It is also possible to execute the individual test classes by specifying the specific test-class to be executed. Below is an example of how to execute the tests in the `TestMessage`-class.
+
+```
+%> mvn test -Dtest=TestStorage 
+```
 
 ### Task A: Publish-subscribe Protocol Messages
 
@@ -180,7 +192,7 @@ The broker data model for the storage is illustrated below
 
 ![](assets/markdown-img-paste-20200218140526335.jpg)
 
-You are required to complete the implementation of the following methods in [Storage.java]( https://github.com/selabhvl/dat110-project2-startcode/blob/master/src/no/hvl/dat110/broker/Storage.java)
+You are required to complete the implementation of the following methods in the `Storage.java` class:
 
 - `public void addClientSession(String user, Connection connection)`
 
@@ -338,27 +350,19 @@ The figure below show a screenshot of the client GUI. The chat application clien
 
 A video-demonstration of the application can be found here: https://www.youtube.com/watch?v=qGibmzlm0x0&feature=youtu.be
 
-In this task you are not to implement anything, you just need to integrate the chat application client and the middleware from Tasks A and B.
+#### Task D.1 Compile and build the Chat application
 
-#### Task D.1 Setup JavaFX and PB-MOM
+In this task you are not to implement anything, but only do an experiment with the chat-application.
 
-Clone the implementation of the ChApp-client which is available as an Eclipse-project from here:
+You can run the chat-application by cloning this repository:
 
-https://github.com/selabhvl/dat110-project2-chapp.git
+https://github.com/lmkr/dat110-project2-javafx-chatapp
 
-If using Java 11 SDK (or later), then you will have to download JavaFX for your platform and then configure the project. For Java 8/9/10 JavaFX is included as part of JDK.
+and then build and execute the application using maven:
 
-Follow the instruction here to setup JavaFX in Eclipse.
-
-https://github.com/selabhvl/dat110public/blob/master/javafx/INSTALL.md
-
-For other IDEs see
-
-- https://gluonhq.com/products/javafx/  
-
-- https://openjfx.io/openjfx-docs/#install-javafx
-
-3. In order to compile the chatapp client you *may* in addition have to add the Eclipse project containing your implementation of the PB-MOM middleware to the Build Path of the project for the chat application GUI client.
+```
+mvn clean javafx:run
+```
 
 #### Task D.2 Running the Chat application
 
@@ -402,6 +406,16 @@ The figure below summarises the implementation with the red boxes indicating cla
 
 ### Handing in the project
 
-Each group must hand in a link on Canvas to a git-repository containing their implementation and screen-shots showing the result of running all the unit-tests.
+1. When the group is ready to hand-in, a **tagged commit** must be pushed to github in order to trigger an action which compiles the solution and runs all test on github. This is done using the following git commands - where *X* is to be replaced by a number:
 
-**Remember** to hand in as a group (see Canvas)
+```
+%> git tag handinX
+%> git push origin handinX
+```
+
+If you for some reason need to hand in again, then *X* will have to be a new number. **Note** it is no problem to push changes multiple times, but the github action is only triggered when you push a specific tag. You can go to your repository on github and check the result of executing the action by selecting the *Actions* tab as shown in the figure below.
+
+2. The group must hand in a **link** on Canvas to the git-repository containing their implementation AND a screenshot showing the chat application in use. **Remember** to hand-in as a group as described in the guide available on Canvas.
+
+3. The group must provide **read access** to their solution repository to the lab-assistent. The usernames of the lab-assistants are available via Canvas.
+
