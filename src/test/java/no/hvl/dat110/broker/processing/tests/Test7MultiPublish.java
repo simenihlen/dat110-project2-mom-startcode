@@ -1,8 +1,8 @@
 package no.hvl.dat110.broker.processing.tests;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import no.hvl.dat110.broker.Broker;
 import no.hvl.dat110.broker.Dispatcher;

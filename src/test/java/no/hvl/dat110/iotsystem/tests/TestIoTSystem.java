@@ -1,8 +1,8 @@
 package no.hvl.dat110.iotsystem.tests;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import no.hvl.dat110.broker.BrokerServer;
 import no.hvl.dat110.iotsystem.DisplayDevice;
