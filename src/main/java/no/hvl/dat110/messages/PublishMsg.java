@@ -6,6 +6,10 @@ public class PublishMsg extends Message {
 	
 	// message sent from client to create publish a message on a topic 
 
+	public PublishMsg(String user, String topic, String message) {
+
+	}
+
 	// TODO:
 	// Implement object variables - a topic and a message is required
 

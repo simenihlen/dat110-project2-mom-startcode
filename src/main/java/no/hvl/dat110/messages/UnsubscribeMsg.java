@@ -4,6 +4,10 @@ public class UnsubscribeMsg extends Message {
 
 	// message sent from client to unsubscribe on a topic 
 
+    public UnsubscribeMsg(String user, String topic) {
+
+    }
+
 	// TODO:
 	// Implement object variables - a topic is required
 
