@@ -76,7 +76,7 @@ The code and tests can be compiled and run from the IDE or using maven commands 
 %>mvn test
 ```
 
-It is also possible to execute the individual test classes by specifying the specific test-class to be executed. Below is an example of how to execute the tests in the `TestMessage`-class.
+It is also possible to execute the individual test classes by specifying the specific test-class to be executed. Below is an example of how to execute the tests in the `TestStorage`-class.
 
 ```
 %> mvn test -Dtest=TestStorage 
