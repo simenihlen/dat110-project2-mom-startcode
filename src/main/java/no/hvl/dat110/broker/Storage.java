@@ -52,50 +52,53 @@ public class Storage {
 
 	public void addClientSession(String user, Connection connection) {
 
-		// TODO: add corresponding client session to the storage
-		// See ClientSession class
-		
-		throw new UnsupportedOperationException(TODO.method());
-		
+		if(clients.containsKey(user)) {
+			removeClientSession(user);
+		}
+		ClientSession cs = new ClientSession(user, connection);
+		clients.put(user, cs);
 	}
 
 	public void removeClientSession(String user) {
 
-		// TODO: disconnet the client (user) 
-		// and remove client session for user from the storage
-		
-		throw new UnsupportedOperationException(TODO.method());
+		clients.remove(user);
 		
 	}
 
 	public void createTopic(String topic) {
 
-		// TODO: create topic in the storage
-
-		throw new UnsupportedOperationException(TODO.method());
+		if(!subscriptions.containsKey(topic)) {
+			Set<String> subscribers = ConcurrentHashMap.newKeySet();
+			subscriptions.put(topic, subscribers);
+		}
 	
 	}
 
 	public void deleteTopic(String topic) {
 
-		// TODO: delete topic from the storage
-
-		throw new UnsupportedOperationException(TODO.method());
+		subscriptions.remove(topic);
 		
 	}
 
 	public void addSubscriber(String user, String topic) {
 
-		// TODO: add the user as subscriber to the topic
-		
-		throw new UnsupportedOperationException(TODO.method());
+		if(subscriptions.containsKey(topic)) {
+			Set<String>	setString = subscriptions.get(topic);
+			if(!setString.contains(user)) {
+				setString.add(user);
+			}
+		}
 		
 	}
 
 	public void removeSubscriber(String user, String topic) {
 
-		// TODO: remove the user as subscriber to the topic
+		if(subscriptions.containsKey(topic)) {
+			Set<String>	setString = subscriptions.get(topic);
+			if(setString.contains(user)) {
+				setString.remove(user);
+			}
+		}
 
-		throw new UnsupportedOperationException(TODO.method());
 	}
 }
